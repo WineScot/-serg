@@ -236,6 +236,26 @@ Prefab:
       propertyPath: m_RootOrder
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 50203267702131820, guid: 54e85e13f84e4644698616a1312a331e,
+        type: 2}
+      propertyPath: m_Simulated
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 50203267702131820, guid: 54e85e13f84e4644698616a1312a331e,
+        type: 2}
+      propertyPath: m_GravityScale
+      value: 4
+      objectReference: {fileID: 0}
+    - target: {fileID: 50203267702131820, guid: 54e85e13f84e4644698616a1312a331e,
+        type: 2}
+      propertyPath: m_LinearDrag
+      value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 114568473488918832, guid: 54e85e13f84e4644698616a1312a331e,
+        type: 2}
+      propertyPath: jumpHeight
+      value: 30
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 54e85e13f84e4644698616a1312a331e, type: 2}
   m_IsPrefabParent: 0
