@@ -12,34 +12,34 @@ public class Player : MonoBehaviour {
     private float canHeal = 0.0f;
 
     public Texture2D healthTexture;
+	public Equipment eq;
 
     void OnGUI()
     {
         GUI.DrawTexture(new Rect(10, 10, healthLevel * 100 / maxhealthLevel, 20), healthTexture);
-
     }
 
 
-    public void TakeHealthPoint(int attackPoints) // this function take hero health point
+    public void TakeHealthPoint(int attackPoints) // this function takes hero health points
     {
         attackPoints -= armorLevel;
         if (attackPoints > 0)
-        {
-            healthLevel -= attackPoints;
+        {            healthLevel -= attackPoints;
         }
+
         if (healthLevel <= 0)
         {
             //event when we die
         }
     }
 
-    public void Cure(bool totally, int curyPoints) // this function cure hero
+    public void Cure(bool totally, int curyPoints) // this function cures hero
     {
         if (totally) // if we want cure hero totally
         {
             healthLevel = maxhealthLevel;
         }
-        else // if we want cure hero incompletly
+        else // if we want cure hero incompletely
         {
             healthLevel += curyPoints;
             if (healthLevel > maxhealthLevel) healthLevel = maxhealthLevel;
@@ -48,7 +48,7 @@ public class Player : MonoBehaviour {
 
     // Use this for initialization
 	void Start () {
-		
+		eq = gameObject.AddComponent<Equipment>() as Equipment;
 	}
 	
 	// Update is called once per frame
