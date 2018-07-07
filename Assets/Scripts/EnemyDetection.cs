@@ -13,7 +13,7 @@ public class EnemyDetection : MonoBehaviour {
 
     public float moveSpeed = 5;
     public float jumpHeight = 60;
-    public float sight = 1;
+    public float sight = 10;
 
     void Start()
     {
@@ -34,14 +34,17 @@ public class EnemyDetection : MonoBehaviour {
             followHero = false;
             vel = new Vector2(0, 0);
         }
-        if (dist.magnitude < sight || followHero)
+        if (base.gameObject.GetComponent<Enemy>().onAttack == false) // block movement during attack to let enemy /odskoczyć/ after hit
         {
-            followHero = true;
- 
-            if (enemyPosition.x > playerPosition.x) vel.x = -moveSpeed;
-            else vel.x = moveSpeed;
+            if (dist.magnitude < sight || followHero)
+            {
+                followHero = true;
+
+                if (enemyPosition.x > playerPosition.x) vel.x = -moveSpeed;
+                else vel.x = moveSpeed;
+            }
+            rb2d.velocity = vel;
         }
-        rb2d.velocity = vel;
     }
 
     void OnTriggerStay2D(Collider2D other)

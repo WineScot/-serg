@@ -6,6 +6,7 @@ public class PlayerController : MonoBehaviour
 {
     private Rigidbody2D rb2d;
     private Animator anim;
+    public bool directionRight = false; // true if hero is turned in right direction
 
     private bool canJump = true;
     public float moveSpeed = 10;
@@ -15,7 +16,6 @@ public class PlayerController : MonoBehaviour
     {
         anim = GetComponent<Animator>();
         rb2d = GetComponent<Rigidbody2D>();
-
     }
 
     void OnTriggerStay2D(Collider2D other)
@@ -37,13 +37,18 @@ public class PlayerController : MonoBehaviour
         }
         if (Input.GetKey(KeyCode.RightArrow))
         {
+            directionRight = true;
             Vector2 movement = new Vector2(moveSpeed, rb2d.velocity.y);
             rb2d.velocity = movement;
+            anim.SetTrigger("playerRightWalk");
         }
         if (Input.GetKey(KeyCode.LeftArrow))
         {
+            directionRight = false;
             Vector2 movement = new Vector2(-moveSpeed, rb2d.velocity.y);
             rb2d.velocity = movement;
+            anim.SetTrigger("playerLeftWalk");
         }
+        
     }
 }
