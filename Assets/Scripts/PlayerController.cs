@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
+// Odpowiada za poruszanie się Graczem
 public class PlayerController : MonoBehaviour
 {
     private Rigidbody2D rb2d;
@@ -18,14 +19,15 @@ public class PlayerController : MonoBehaviour
         rb2d = GetComponent<Rigidbody2D>();
     }
 
-    void OnTriggerStay2D(Collider2D other)
-    {
-        canJump = true;
-    }
-
+	// Jeśli gracz jest w powietrzu (nie koliduje z niczym) nie może skakać
     void OnTriggerExit2D(Collider2D other)
     {
         canJump = false;
+    }
+	    
+	void OnTriggerStay2D(Collider2D other)
+    {
+        canJump = true;
     }
 
     void Update()
@@ -33,7 +35,7 @@ public class PlayerController : MonoBehaviour
         if (Input.GetKeyDown(KeyCode.UpArrow) && canJump)
         {
             Vector2 movement = new Vector2(rb2d.velocity.x, jumpHeight);
-            rb2d.velocity = movement;
+            rb2d.velocity = movement;// powinniśmy użyć rb2d.AddForce(Vector2 force);(chyba)
         }
         if (Input.GetKey(KeyCode.RightArrow))
         {
@@ -42,13 +44,17 @@ public class PlayerController : MonoBehaviour
             rb2d.velocity = movement;
             anim.SetTrigger("playerRightWalk");
         }
-        if (Input.GetKey(KeyCode.LeftArrow))
+        else if (Input.GetKey(KeyCode.LeftArrow))
         {
             directionRight = false;
             Vector2 movement = new Vector2(-moveSpeed, rb2d.velocity.y);
             rb2d.velocity = movement;
             anim.SetTrigger("playerLeftWalk");
         }
-        
+		else
+		{
+			anim.SetTrigger("playerIdle");
+			Debug.Log("playerIdle");
+		}
     }
 }

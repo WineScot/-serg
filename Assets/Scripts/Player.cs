@@ -24,7 +24,8 @@ public class Player : MonoBehaviour {
     {
         attackPoints -= armorLevel;
         if (attackPoints > 0)
-        {            healthLevel -= attackPoints;
+        {            
+			healthLevel -= attackPoints;
         }
 
         if (healthLevel <= 0)
