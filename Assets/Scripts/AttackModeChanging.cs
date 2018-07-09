@@ -41,7 +41,6 @@ public class AttackModeChanging : MonoBehaviour {
         
     }
 
-	
 	void Update () {
         if (Input.GetKeyDown(KeyCode.Alpha1)) EnablingMode(1);
         if (Input.GetKeyDown(KeyCode.Alpha2)) EnablingMode(2);
@@ -52,7 +51,9 @@ public class AttackModeChanging : MonoBehaviour {
             if (spear == null)
             {
                 GameObject instance = Instantiate(spearToInstantiate, transform) as GameObject;
-            }
+				Rigidbody2D rb2d = instance.GetComponent<Rigidbody2D>();
+				rb2d.isKinematic = true;
+			}
         }
     }
 }

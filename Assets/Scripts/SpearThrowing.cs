@@ -43,6 +43,7 @@ public class SpearThrowing : MonoBehaviour
             {
                 transform.parent = null;
                 collider.enabled = true;
+				rb2d.isKinematic = false;
                 rb2d.gravityScale = gravityScale; // gravity should be on
                 rb2d.velocity = vel;
                 rb2d.velocity *= scale;
