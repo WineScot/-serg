@@ -13,6 +13,9 @@ public class Player : MonoBehaviour {
 
     public Texture2D healthTexture;
 	public Equipment eq;
+    private GameObject eqDisplay;
+
+
 
     void OnGUI()
     {
@@ -50,12 +53,26 @@ public class Player : MonoBehaviour {
     // Use this for initialization
 	void Start () {
 		eq = gameObject.AddComponent<Equipment>() as Equipment;
-	}
+        eqDisplay = GameObject.FindGameObjectWithTag("Inventory");
+    }
 	
 	// Update is called once per frame
+
 	void Update () {
 
-        if(Input.GetButtonDown("Fire1"))//Funkcja testowa, po wcisniecu "h" gracz zadaje sobie obrazenia (Kto wie dlaczego "h" ?) To pewnie z jakiejś gry co?
+        if (Input.GetKey(KeyCode.I))
+        {
+            if (eqDisplay.GetComponent<Canvas>().isActiveAndEnabled)
+            {
+                eqDisplay.GetComponent<Canvas>().enabled = false;
+            }
+            else
+            {
+                eqDisplay.GetComponent<Canvas>().enabled = true;
+            }
+        }
+
+        if (Input.GetButtonDown("Fire1"))//Funkcja testowa, po wcisniecu "h" gracz zadaje sobie obrazenia (Kto wie dlaczego "h" ?) To pewnie z jakiejś gry co?
         {
             healthLevel -= 10;
             canHeal = 5.0f;
@@ -80,5 +97,18 @@ public class Player : MonoBehaviour {
     IEnumerator heal() //Odczekuje, aby przyrost hp fajniej wygladal
     {
         yield return new WaitForSeconds(0.5f);
+    }
+
+    void OnTriggerEnter2D(Collider2D other)
+    {
+        if (other.gameObject.CompareTag("PickUp"))
+        {
+            if (Input.GetKey(KeyCode.F))
+            {
+                other.gameObject.SetActive(false);
+                eq.AddToEq(other.gameObject);
+                gameObject.GetComponentInChildren<InventoryManager>().UpdateInventory(other.gameObject);
+            }
+        }
     }
 }

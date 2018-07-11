@@ -3,7 +3,13 @@
 --- !u!78 &1
 TagManager:
   serializedVersion: 2
-  tags: []
+  tags:
+  - Enemy
+  - Spear
+  - Sword2
+  - Sword1
+  - PickUp
+  - Inventory
   layers:
   - Default
   - TransparentFX

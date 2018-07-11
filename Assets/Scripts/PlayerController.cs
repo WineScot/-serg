@@ -54,7 +54,7 @@ public class PlayerController : MonoBehaviour
 		else
 		{
 			anim.SetTrigger("playerIdle");
-			Debug.Log("playerIdle");
+			//Debug.Log("playerIdle");
 		}
     }
 }
