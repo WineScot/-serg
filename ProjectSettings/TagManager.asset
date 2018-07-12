@@ -10,6 +10,7 @@ TagManager:
   - Sword1
   - PickUp
   - Inventory
+  - Hand
   layers:
   - Default
   - TransparentFX
