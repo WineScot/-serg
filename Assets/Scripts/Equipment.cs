@@ -4,28 +4,28 @@ using UnityEngine;
 
 public class Equipment : MonoBehaviour
 {
-	// później, w razie potrzeby możemy zastąpić GameObject własną klasą przedmiotu
-	public List <GameObject> equipment = new List<GameObject>();
+	// lista wszystkich przedmiotów
+	public List <Item> equipment = new List<Item>();
 	
 	// Przedmioty aktualnie używane przez Gracza
 	// Jak będzie ich więcej to można zastąpić tablicą
-	public GameObject Weapon;
-	public GameObject Spear;
+	public Item Weapon;
+	public Item Spear;
 	
 	public void ShowEquipment()
 	{
-		foreach(GameObject g in equipment)
+		foreach(Item g in equipment)
 		{
 			Debug.Log(g.name);
 		}
 	}
 	
-	public void AddToEq(GameObject added)
+	public void AddToEq(Item added)
 	{
 		equipment.Add(added);
 	}
 	
-	public void RemoveFromEq(GameObject removed)
+	public void RemoveFromEq(Item removed)
 	{
 		equipment.Remove(removed);
 	}
