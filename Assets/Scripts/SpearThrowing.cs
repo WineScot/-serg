@@ -6,22 +6,22 @@ public class SpearThrowing : MonoBehaviour
 {
 
     private Rigidbody2D rb2d; // Rigidbody of Spear
-    private Collider2D collider; // Collider of Spear
+    private Collider2D spearCollider; // Collider of Spear
     private bool isThrowing = false; // true when player is targetting
     private bool isFlying = false;
     private bool isLying = false;
     private float gravityScale; // variable for on and off the gravity for spear
-    private int attackPoint = 40;
+    public int attackPoint = 40;
 
     public float scale = 1; // scaling velocity
 
     void Start()
     {
         rb2d = GetComponent<Rigidbody2D>();
-        collider = GetComponent<Collider2D>();
+        spearCollider = GetComponent<Collider2D>();
         gravityScale = rb2d.gravityScale;
         rb2d.gravityScale = 0; // when the spear appear, it's in player's hand, so gravity have to be off for spear
-        collider.enabled = false;
+        spearCollider.enabled = false;
         transform.position = transform.parent.position;
     }
 
@@ -42,7 +42,7 @@ public class SpearThrowing : MonoBehaviour
             if (Input.GetMouseButtonDown(0)) // when the player throw the spear
             {
                 transform.parent = null;
-                collider.enabled = true;
+                spearCollider.enabled = true;
 				rb2d.isKinematic = false;
                 rb2d.gravityScale = gravityScale; // gravity should be on
                 rb2d.velocity = vel;
