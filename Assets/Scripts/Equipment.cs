@@ -29,4 +29,13 @@ public class Equipment : MonoBehaviour
 	{
 		equipment.Remove(removed);
 	}
+	
+	void Start()
+	{
+		//domyślny miecz
+		Item miecz = new Item(0);
+		miecz.attack = 20;
+		equipment.Add(miecz);
+		Weapon = miecz;
+	}
 }
