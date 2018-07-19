@@ -4,27 +4,35 @@ using UnityEngine;
 
 public class Item : MonoBehaviour
 {
-	public string name;
-	enum Kind { Weapon, Potion, Other };
+    public string itemId;
+	public string itemName;
+    public string description;
+	public enum Type { Weapon, Potion, Other };
 	// typ przedmiotu. Potem można to zastąpić dziedziczniem jeśli będzie to konieczne
-	public int kind;
-	public int attack;
+	public Type itemType;
+    public int attack;
+    // i inne...
 	
-	public Item( int k )
+    [Newtonsoft.Json.JsonConstructor]
+	public Item( string _itemId, string _itemName, string _description, Type _itemType, int _attack )
 	{
-		kind = k;
+        this.itemId = _itemId;
+        this.itemName = _itemName;
+        this.description = _description;
+        this.itemType = _itemType;
+        this.attack = _attack;
 	}
 	
 	public int GetAttack()
 	{
-		if(kind == (int)Kind.Weapon)
+		if(true)
 		{
 			return attack;
 		}
 		else
-		{	
-			Debug.LogWarning("Przedmiot który nie jest bronią został użyty jako broń");
-			return -1;
+		{
+            Debug.LogWarning("Przedmiot który nie jest bronią został użyty jako broń");
+            return -1;
 		}	
 	}
 }

@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using Newtonsoft.Json;
 
 public class ItemDatabase : MonoBehaviour {
 	public static ItemDatabase Instance;
@@ -11,11 +12,14 @@ public class ItemDatabase : MonoBehaviour {
 			Destroy(gameObject);
 		else
 			Instance = this;
-		
+
+        InitializeDatabase();
 	}
 	
-	// Update is called once per frame
-	void Update () {
-		
-	}
+	private void InitializeDatabase()
+	{
+
+        Database = JsonConvert.DeserializeObject<List<Item>>( Resources.Load<TextAsset>("Items").ToString() );
+        Debug.Log(Database[0].attack);
+    }
 }
