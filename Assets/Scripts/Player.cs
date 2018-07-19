@@ -12,7 +12,7 @@ public class Player : MonoBehaviour {
     private float canHeal = 0.0f;
 
     public Texture2D healthTexture;
-	public Equipment eq;
+	public Equipment eq = new Equipment();
     private GameObject eqDisplay;
 
 
@@ -52,7 +52,7 @@ public class Player : MonoBehaviour {
 
     // Use this for initialization
 	void Start () {
-		eq = gameObject.AddComponent<Equipment>() as Equipment;
+		//eq = gameObject.AddComponent<Equipment>() as Equipment;
         eqDisplay = GameObject.FindGameObjectWithTag("Inventory");
     }
 	
@@ -60,7 +60,7 @@ public class Player : MonoBehaviour {
 
 	void Update () {
 
-        if (Input.GetKey(KeyCode.I))
+        if (Input.GetKeyDown(KeyCode.I))
         {
             if (eqDisplay.GetComponent<Canvas>().isActiveAndEnabled)
             {
@@ -105,9 +105,11 @@ public class Player : MonoBehaviour {
         {
             if (Input.GetKey(KeyCode.F))
             {
-                other.gameObject.SetActive(false);
-                eq.AddToEq(other.gameObject);
-                gameObject.GetComponentInChildren<InventoryManager>().UpdateInventory(other.gameObject);
+                other.gameObject.SetActive(false); //a może lepiej usunąć?
+                string[] str = other.gameObject.name.Split(' ');// żeby odciąć liczbę w nawiasie "PickUp (1)"
+                Item i = ItemDatabase.Instance.GetItem(str[0]);
+                eq.AddToEq( i );
+                gameObject.GetComponentInChildren<InventoryManager>().UpdateInventory( i );
             }
         }
     }

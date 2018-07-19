@@ -9,7 +9,7 @@ public class InventoryManager : MonoBehaviour {
 
     private GameObject player;
     public List<Item> inventory;
-    private List<GameObject> Items;
+    private List<GameObject> Items = new List<GameObject>();
 
     // Use this for initialization
     void Start()
@@ -20,7 +20,7 @@ public class InventoryManager : MonoBehaviour {
         inventory = gameObject.GetComponentInParent<Player>().eq.equipment;
         foreach (Item g in inventory)
         {
-			UpdateInventory(g.gameObject);
+			UpdateInventory(g);
 			/*g.gameObject = Instantiate(Template);
             g.gameObject.SetActive(true);
             g.gameObject.GetComponent<EquipmentElement>().SetText(g.name);
@@ -29,11 +29,11 @@ public class InventoryManager : MonoBehaviour {
         }
     }
 
-    public void UpdateInventory(GameObject g)
+    public void UpdateInventory(Item g)
     {     
             GameObject slot = Instantiate(Template) as GameObject;
             slot.SetActive(true);
-            slot.GetComponent<EquipmentElement>().SetText(g.name);
+            slot.GetComponent<EquipmentElement>().SetText(g.itemName);
             slot.transform.SetParent(Template.transform.parent, false);
             Items.Add(slot);
     }

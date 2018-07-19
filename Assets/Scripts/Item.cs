@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Item : MonoBehaviour
+public class Item
 {
     public string itemId;
 	public string itemName;
@@ -23,16 +23,4 @@ public class Item : MonoBehaviour
         this.attack = _attack;
 	}
 	
-	public int GetAttack()
-	{
-		if(true)
-		{
-			return attack;
-		}
-		else
-		{
-            Debug.LogWarning("Przedmiot który nie jest bronią został użyty jako broń");
-            return -1;
-		}	
-	}
 }

@@ -1,13 +1,13 @@
 [
   {
-    "objectId": "sword",
+    "itemId": "Weapon",
     "itemName": "Sword",
     "description": "A long, sharp blade.",
     "itemType": "Weapon",
 	"attack": 20,
   },
   {
-    "objectId": "staff",
+    "itemId": "PickUp",
     "itemName": "Cactus",
     "description": "A long, sharp cactus.",
     "itemType":  "Weapon",
@@ -15,7 +15,7 @@
     
   },
   {
-    "objectSlug": "potion_log",
+    "itemId": "Spear",
     "itemName": "Log Potion",
     "description": "A potion that logs something to the console.",
     "itemType": "Potion",
