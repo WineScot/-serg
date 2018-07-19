@@ -8,7 +8,7 @@ public class EnemyDetection : MonoBehaviour {
     private Animator anim;
     private GameObject player;
 
-    private bool canJump = true;
+    //private bool canJump = true;
     private bool followHero = false;
 
     public float moveSpeed = 5;
@@ -47,7 +47,7 @@ public class EnemyDetection : MonoBehaviour {
         }
     }
 
-    void OnTriggerStay2D(Collider2D other)
+    /*void OnTriggerStay2D(Collider2D other)
     {
         canJump = true;
     }
@@ -55,7 +55,7 @@ public class EnemyDetection : MonoBehaviour {
     void OnTriggerExit2D(Collider2D other)
     {
         canJump = false;
-    }
+    }*/
 
     public void ChangeVelocity(Vector2 tmp)
     {

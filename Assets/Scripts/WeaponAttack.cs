@@ -6,7 +6,7 @@ public class WeaponAttack : MonoBehaviour
 {
 
     public bool intrigger = false;
-    private int attackPoint = 20;
+    public int attackPoint = 20;
     private float timeAttackWorks = 0.5f; // how long sword can hit the enemy after key pressed
     private float time; // time attack should work
     public bool activeAttackArea = false; // use to specify whitch attackArea should by active

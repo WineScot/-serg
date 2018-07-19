@@ -6,8 +6,8 @@ public class Player : MonoBehaviour {
 
     private float healthLevel = 100f;
     private float maxhealthLevel = 100f;
-    private int magicLevel = 1000;
-    private int baseAttack = 40;
+    //private int magicLevel = 1000;
+    //private int baseAttack = 40;
     private int armorLevel = 10;
     private float canHeal = 0.0f;
 

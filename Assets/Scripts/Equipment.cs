@@ -22,13 +22,30 @@ public class Equipment
 		equipment.Remove(removed);
 	}
 	
+    void EquipWeapon(string name)
+    {
+        // dodać sprawdzenie czy to broń
+        Weapon = ItemDatabase.Instance.GetItem(name);
+        WeaponAttack atk = GameObject.FindGameObjectWithTag("Player").GetComponent<WeaponAttack>();
+        atk.attackPoint = Weapon.attack;
+    }
+
+    void EquipSpear(string name)
+    {
+        // sprawdzić czy włucznia
+        Spear = ItemDatabase.Instance.GetItem(name);
+        SpearThrowing spr = GameObject.FindGameObjectWithTag("Player").GetComponent<SpearThrowing>();
+        spr.attackPoint = Spear.attack;
+    }
+
 	void Start()
 	{
-		//domyślny miecz
-		//Item miecz = new Item(0);
-		//miecz.attack = 20;
-		//equipment.Add(miecz);
-		Weapon = ItemDatabase.Instance.GetItem("Weapon");
-		Spear = ItemDatabase.Instance.GetItem("Spear");
+        //domyślny miecz
+        //Item miecz = new Item(0);
+        //miecz.attack = 20;
+        //equipment.Add(miecz);
+        EquipWeapon("Weapon");
+        EquipSpear("Spear");
+        //Spear = ItemDatabase.Instance.GetItem("Spear");
 	}
 }
