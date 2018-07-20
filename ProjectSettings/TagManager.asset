@@ -10,6 +10,7 @@ TagManager:
   - Sword1
   - PickUp
   - Inventory
+  - Hand
   layers:
   - Default
   - TransparentFX
@@ -19,7 +20,7 @@ TagManager:
   - UI
   - 
   - 
-  - 
+  - First
   - 
   - 
   - 
@@ -44,8 +45,14 @@ TagManager:
   - 
   - 
   m_SortingLayers:
+  - name: First
+    uniqueID: 460060065
+    locked: 0
   - name: Default
     uniqueID: 0
+    locked: 0
+  - name: UI
+    uniqueID: 2241730851
     locked: 0
   - name: Background
     uniqueID: 1997621751

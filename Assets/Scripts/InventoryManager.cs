@@ -8,8 +8,8 @@ public class InventoryManager : MonoBehaviour {
     private GameObject Template;
 
     private GameObject player;
-    public List<GameObject> inventory;
-    private List<GameObject> Items;
+    public List<Item> inventory;
+    private List<GameObject> Items = new List<GameObject>();
 
     // Use this for initialization
     void Start()
@@ -18,21 +18,22 @@ public class InventoryManager : MonoBehaviour {
     }
     public void StartInventory () {
         inventory = gameObject.GetComponentInParent<Player>().eq.equipment;
-        foreach (GameObject g in inventory)
+        foreach (Item g in inventory)
         {
-            GameObject slot = Instantiate(Template) as GameObject;
-            slot.SetActive(true);
-            slot.GetComponent<EquipmentElement>().SetText(g.name);
-            slot.transform.SetParent(Template.transform.parent, false);
-            Items.Add(slot);
+			UpdateInventory(g);
+			/*g.gameObject = Instantiate(Template);
+            g.gameObject.SetActive(true);
+            g.gameObject.GetComponent<EquipmentElement>().SetText(g.name);
+            g.gameObject.transform.SetParent(Template.transform.parent, false);
+            Items.Add(g);*/
         }
     }
 
-    public void UpdateInventory(GameObject g)
+    public void UpdateInventory(Item g)
     {     
             GameObject slot = Instantiate(Template) as GameObject;
             slot.SetActive(true);
-            slot.GetComponent<EquipmentElement>().SetText(g.name);
+            slot.GetComponent<EquipmentElement>().SetText(g.itemName);
             slot.transform.SetParent(Template.transform.parent, false);
             Items.Add(slot);
     }

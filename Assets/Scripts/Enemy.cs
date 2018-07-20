@@ -10,11 +10,11 @@ public class Enemy : MonoBehaviour {
     public int healthLevel = 100;
     public bool onAttack = false; // true - when Enemy is attacking
 
-    private int maxhealthLevel = 1000;
-    private int magicLevel = 1000;
-    private int baseAttack = 40;
+    //private int maxhealthLevel = 1000;
+    //private int magicLevel = 1000;
+    //private int baseAttack = 40;
     private int armorLevel = 0;
-    private int cureQuick = 10;
+    //private int cureQuick = 10;
     
     
 
@@ -50,7 +50,7 @@ public class Enemy : MonoBehaviour {
             movement = new Vector2(-50, 30);
         }
         rb2d.velocity = movement;
-        Invoke("OnAttackFalse", 1); // evokes funcion after 2 seconds
+        Invoke("OnAttackFalse", 1); // evokes function after 2 seconds
     }
 
     public void OnAttackFalse() // unlock motion in EnemyDetection

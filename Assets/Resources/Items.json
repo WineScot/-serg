@@ -1,0 +1,24 @@
+[
+  {
+    "itemId": "Weapon",
+    "itemName": "Sword",
+    "description": "A long, sharp blade.",
+    "itemType": "Weapon",
+	"attack": 20,
+  },
+  {
+    "itemId": "PickUp",
+    "itemName": "Cactus",
+    "description": "A long, sharp cactus.",
+    "itemType":  "Weapon",
+	"attack": 10,
+    
+  },
+  {
+    "itemId": "Spear",
+    "itemName": "Log Potion",
+    "description": "A potion that logs something to the console.",
+    "itemType": "Potion",
+	"attack": 1,
+  }
+]
