@@ -6,8 +6,10 @@ public class Enemy : MonoBehaviour {
 
     private Rigidbody2D rb2d;
     private GameObject player;
+    private Animator anim;
 
     public int healthLevel = 100;
+    public bool heroInAttackArea = false;
     public bool onAttack = false; // true - when Enemy is attacking
 
     //private int maxhealthLevel = 1000;
@@ -21,9 +23,15 @@ public class Enemy : MonoBehaviour {
     // Use this for initialization
 	void Start () 
     {
+        anim = GetComponent<Animator>();
         rb2d = GetComponent<Rigidbody2D>();
         player = GameObject.FindGameObjectWithTag("Player");
 	}
+
+    public void PlayAnim(string animName) // play animation
+    {
+        anim.SetTrigger(animName);
+    }
 
     public void TakeHealthPoint(int attackPoints) // this function take hero health point
     {
@@ -62,7 +70,8 @@ public class Enemy : MonoBehaviour {
 	
 	
 	// Update is called once per frame
-	void Update () {
-		
+	void Update () 
+    {
+       
 	}
 }

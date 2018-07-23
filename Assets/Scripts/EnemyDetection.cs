@@ -11,12 +11,14 @@ public class EnemyDetection : MonoBehaviour {
     //private bool canJump = true;
     private bool followHero = false;
 
-    public float moveSpeed = 5;
+    public float moveSpeed = 15;
     public float jumpHeight = 60;
-    public float sight = 10;
+    public float sight = 50;
+    public bool OnLeft = true; // postac zwrucona w lewo
 
     void Start()
     {
+        anim = GetComponent<Animator>();
         rb2d = GetComponent<Rigidbody2D>();
         player = GameObject.FindGameObjectWithTag("Player");
     }
@@ -36,12 +38,26 @@ public class EnemyDetection : MonoBehaviour {
         }
         if (base.gameObject.GetComponent<Enemy>().onAttack == false) // block movement during attack to let enemy /odskoczyć/ after hit
         {
-            if (dist.magnitude < sight || followHero)
+            if ((dist.magnitude < sight || followHero) && base.gameObject.GetComponent<Enemy>().heroInAttackArea == false)
             {
                 followHero = true;
 
-                if (enemyPosition.x > playerPosition.x) vel.x = -moveSpeed;
-                else vel.x = moveSpeed;
+                if (enemyPosition.x > playerPosition.x)
+                {
+                    vel.x = -moveSpeed;
+                    OnLeft = true;
+                    anim.SetTrigger("EnemyLeftWalk");
+                }
+                else
+                {
+                    vel.x = moveSpeed;
+                    OnLeft = false;
+                    anim.SetTrigger("EnemyRightWalk");
+                }
+            }
+            else
+            {
+                anim.SetTrigger("EnemyStanding");
             }
             rb2d.velocity = vel;
         }

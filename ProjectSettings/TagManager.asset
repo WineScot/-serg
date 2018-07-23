@@ -11,6 +11,8 @@ TagManager:
   - PickUp
   - Inventory
   - Hand
+  - LeftAttack
+  - RightAttack
   layers:
   - Default
   - TransparentFX
@@ -45,11 +47,11 @@ TagManager:
   - 
   - 
   m_SortingLayers:
-  - name: Default
-    uniqueID: 0
-    locked: 0
   - name: Background
     uniqueID: 1997621751
+    locked: 0
+  - name: Default
+    uniqueID: 0
     locked: 0
   - name: Player
     uniqueID: 2081017493

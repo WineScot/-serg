@@ -10,8 +10,9 @@ public class PlayerController : MonoBehaviour
     public bool directionRight = false; // true if hero is turned in right direction
 
     private bool canJump = true;
-    public float moveSpeed = 10;
-    public float jumpHeight = 60;
+    public float moveSpeed = 50;
+    public float jumpHeight = 110;
+    public bool cantMove = false;
 
     void Start()
     {
@@ -30,21 +31,34 @@ public class PlayerController : MonoBehaviour
         canJump = true;
     }
 
+    public void WhileStrongAttack(float moveS, float jumpH)
+    {
+        cantMove = true;
+        Vector2 movement = new Vector2(moveS, jumpH);
+        rb2d.velocity = movement;
+        Invoke("SetCantMove", 0.9f);
+    }
+
+    public void SetCantMove()
+    {
+        cantMove = false;
+    }
+
     void Update()
     {
-        if (Input.GetKeyDown(KeyCode.UpArrow) && canJump)
+        if (Input.GetKeyDown(KeyCode.UpArrow) && canJump && cantMove == false)
         {
             Vector2 movement = new Vector2(rb2d.velocity.x, jumpHeight);
-            rb2d.velocity = movement;// powinniśmy użyć rb2d.AddForce(Vector2 force);(chyba)
+            rb2d.velocity = movement;// powinniśmy użyć rb2d.AddForce(Vector2 force);(chyba) - ale to działa w sumie spoko bo z siłami nie ma sensu się bawić
         }
-        if (Input.GetKey(KeyCode.RightArrow))
+        if (Input.GetKey(KeyCode.RightArrow)&&cantMove==false)
         {
             directionRight = true;
             Vector2 movement = new Vector2(moveSpeed, rb2d.velocity.y);
             rb2d.velocity = movement;
             anim.SetTrigger("playerRightWalk");
         }
-        else if (Input.GetKey(KeyCode.LeftArrow))
+        else if (Input.GetKey(KeyCode.LeftArrow) && cantMove == false)
         {
             directionRight = false;
             Vector2 movement = new Vector2(-moveSpeed, rb2d.velocity.y);
@@ -55,5 +69,10 @@ public class PlayerController : MonoBehaviour
 		{
 			anim.SetTrigger("playerIdle");
 		}
+        if ((Input.GetKey(KeyCode.RightArrow) != true && Input.GetKey(KeyCode.LeftArrow) != true && canJump!=false)||cantMove)
+        {
+            Vector2 movement = new Vector2(0, rb2d.velocity.y);
+            rb2d.velocity = movement;
+        }
     }
 }
