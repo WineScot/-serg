@@ -4,11 +4,11 @@ using UnityEngine;
 
 public class Player : MonoBehaviour {
 
-    private float healthLevel = 100f;
+    public float healthLevel = 100f;
     private float maxhealthLevel = 100f;
     //private int magicLevel = 1000;
     //private int baseAttack = 40;
-    private int armorLevel = 10;
+    private float armorPoint = 0f;
     private float canHeal = 0.0f;
 
     public Texture2D healthTexture;
@@ -17,15 +17,15 @@ public class Player : MonoBehaviour {
 
 
 
-    void OnGUI()
+    /*void OnGUI()
     {
         GUI.DrawTexture(new Rect(10, 10, healthLevel * 100 / maxhealthLevel, 20), healthTexture);
-    }
+    }*/
 
 
-    public void TakeHealthPoint(int attackPoints) // this function takes hero health points
+    public void TakeHealthPoint(float attackPoints) // this function takes hero health points
     {
-        attackPoints -= armorLevel;
+        attackPoints -= armorPoint;
         if (attackPoints > 0)
         {            
 			healthLevel -= attackPoints;
@@ -72,7 +72,7 @@ public class Player : MonoBehaviour {
             }
         }
 
-        if (Input.GetButtonDown("Fire1"))//Funkcja testowa, po wcisniecu "h" gracz zadaje sobie obrazenia (Kto wie dlaczego "h" ?) To pewnie z jakiejś gry co?
+        /*if (Input.GetButtonDown("Fire1"))//Funkcja testowa, po wcisniecu "h" gracz zadaje sobie obrazenia (Kto wie dlaczego "h" ?) To pewnie z jakiejś gry co?
         {
             healthLevel -= 10;
             canHeal = 5.0f;
@@ -90,7 +90,7 @@ public class Player : MonoBehaviour {
                 StartCoroutine("heal"); //Uruchamia podprogram
             }
             Mathf.Clamp(healthLevel, 0, maxhealthLevel); //Utrzymuje healthLevel, zaby nie rzekroczyl wartosci granicznych
-        }
+        }*/
 
 
     }

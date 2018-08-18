@@ -45,26 +45,10 @@ public class Enemy : MonoBehaviour {
         {
             Destroy(gameObject);
         }
-        onAttack = true; // onAttack block motion in EnemyDetection
-        Vector2 movement;
         Vector2 playerPosition = player.transform.position;
         Vector2 enemyPosition = GetComponent<Rigidbody2D>().position;
-        if (enemyPosition.x > playerPosition.x)
-        {
-            movement = new Vector2(50, 30);
-        }
-        else
-        {
-            movement = new Vector2(-50, 30);
-        }
-        rb2d.velocity = movement;
-        Invoke("OnAttackFalse", 1); // evokes function after 2 seconds
     }
 
-    public void OnAttackFalse() // unlock motion in EnemyDetection
-    {
-        onAttack = false;
-    }
 
 
 	

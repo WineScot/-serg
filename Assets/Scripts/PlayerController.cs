@@ -33,10 +33,11 @@ public class PlayerController : MonoBehaviour
 
     public void WhileStrongAttack(float moveS, float jumpH)
     {
+        /*
         cantMove = true;
         Vector2 movement = new Vector2(moveS, jumpH);
         rb2d.velocity = movement;
-        Invoke("SetCantMove", 0.9f);
+        Invoke("SetCantMove", 0.9f);*/
     }
 
     public void SetCantMove()
