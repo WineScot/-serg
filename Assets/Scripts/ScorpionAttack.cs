@@ -5,12 +5,25 @@ using UnityEngine;
 public class ScorpionAttack : MonoBehaviour {
 
 
-    public float attackPoint = 0.5f;
-    public float tailAttackPoint = 1f;
+    public float attackPoint = 1f;
+    public float tailAttackPoint = 10f;
     private GameObject player;
     public bool attackTime = true;
 
     public int warningAttack = 0; // true after 2x base scorpion attack - activats tail attack
+
+    void OnTriggerEnter2D(Collider2D other)
+    {
+        if (other.tag == "Player")
+        {
+            base.transform.parent.gameObject.GetComponent<Enemy>().heroInAttackArea = true;
+        }
+        else
+        {
+            base.transform.parent.gameObject.GetComponent<Enemy>().heroInAttackArea = false;
+            warningAttack = 0;
+        }
+    }
 
     void OnTriggerStay2D(Collider2D other)
     {
@@ -36,9 +49,17 @@ public class ScorpionAttack : MonoBehaviour {
         attackTime = true;
     }
 
-    public void NowTakeHealthPoint()
+    public void NowTakeHealthPoint()//take health point currently tail attack
     {
-        player.gameObject.GetComponent<Player>().TakeHealthPoint(1);
+        player.gameObject.GetComponent<Player>().TakeHealthPoint(tailAttackPoint/2);
+        if (base.transform.parent.gameObject.GetComponent<EnemyDetection>().OnLeft)
+        {
+            player.gameObject.GetComponent<PlayerController>().WhileStrongAttack(-30, 60);
+        }
+        else
+        {
+            player.gameObject.GetComponent<PlayerController>().WhileStrongAttack(30, 60);
+        }
     }
 
 	// Use this for initialization
@@ -57,9 +78,9 @@ public class ScorpionAttack : MonoBehaviour {
         }
         if (base.transform.parent.gameObject.GetComponent<Enemy>().heroInAttackArea && attackTime)
         {
-            if (warningAttack < 2)
+            if (warningAttack < 2) // 2x warning attacks
             {
-                player.gameObject.GetComponent<Player>().TakeHealthPoint(attackPoint);
+                player.gameObject.GetComponent<Player>().TakeHealthPoint(attackPoint/2);
                 if (base.transform.parent.gameObject.GetComponent<EnemyDetection>().OnLeft)
                 {
                     base.transform.parent.gameObject.GetComponent<Enemy>().PlayAnim("ScorpionLeftAttack");
@@ -74,7 +95,7 @@ public class ScorpionAttack : MonoBehaviour {
                 }
                 warningAttack++;
             }
-            else
+            else //after 2 warning attacks succeed tail attack
             {
                 Invoke("NowTakeHealthPoint", 0.5f);
                 if (base.transform.parent.gameObject.GetComponent<EnemyDetection>().OnLeft)
@@ -82,14 +103,12 @@ public class ScorpionAttack : MonoBehaviour {
                     base.transform.parent.gameObject.GetComponent<Enemy>().PlayAnim("ScorpionLeftTailAttack");
                     attackTime = false;
                     Invoke("NowYouCanAttack", 1.4f);
-                    //player.gameObject.GetComponent<PlayerController>().WhileStrongAttack(0, 0);
                 }
                 else
                 {
                     base.transform.parent.gameObject.GetComponent<Enemy>().PlayAnim("ScorpionRightTailAttack");
                     attackTime = false;
                     Invoke("NowYouCanAttack", 1.4f);
-                    //player.gameObject.GetComponent<PlayerController>().WhileStrongAttack(0, 0);
                 }
                 warningAttack = 0;
             }

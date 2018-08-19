@@ -11,10 +11,12 @@ public class EnemyDetection : MonoBehaviour {
     //private bool canJump = true;
     private bool followHero = false;
 
+
     public float moveSpeed = 15;
     public float jumpHeight = 60;
     public float sight = 50;
     public bool OnLeft = true; // postac zwrucona w lewo
+    public bool Stop = false;
 
     void Start()
     {
@@ -31,6 +33,16 @@ public class EnemyDetection : MonoBehaviour {
         Vector2 vel = new Vector2(0, 0);
         vel.y = rb2d.velocity.y;
 
+        if(rb2d.velocity.x < 0.01f)
+        {
+            anim.SetTrigger("EnemyStanding");
+            Stop = true;
+        }
+        else
+        {
+            Stop = false;
+        }
+
         if (dist.magnitude > 2*sight)
         {
             followHero = false;
@@ -42,13 +54,13 @@ public class EnemyDetection : MonoBehaviour {
             {
                 followHero = true;
 
-                if (enemyPosition.x > playerPosition.x)
+                if (enemyPosition.x > playerPosition.x + 5f)
                 {
                     vel.x = -moveSpeed;
                     OnLeft = true;
                     anim.SetTrigger("EnemyLeftWalk");
                 }
-                else
+                if (enemyPosition.x < playerPosition.x - 5f)
                 {
                     vel.x = moveSpeed;
                     OnLeft = false;

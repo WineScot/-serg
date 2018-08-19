@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class WeaponController : MonoBehaviour {
 
+    /*wsk attack area*/
     private GameObject swordul;
     private GameObject swordur;
     private GameObject swordml;
@@ -12,7 +13,7 @@ public class WeaponController : MonoBehaviour {
     private GameObject sworddr;
     private GameObject hand;
     private Animator anim;
-    public bool onAttack = false;
+    public bool onAttack = false; // true if hero currently attack
 
     bool GetDirectionRight() // dircetionRight from PlayerController script
     {
@@ -32,7 +33,7 @@ public class WeaponController : MonoBehaviour {
         anim = hand.GetComponent<Animator>();
     }
 
-    void FinishAttack()
+    void FinishAttack() // change onAttack for true
     {
         onAttack = false;
     }
@@ -42,7 +43,7 @@ public class WeaponController : MonoBehaviour {
     {
         if (onAttack==false)
         {
-            if (Input.GetKeyDown(KeyCode.A)) // attack in one direction
+            if (Input.GetKeyDown(KeyCode.A)) // upwards attack
             {
                 if (GetDirectionRight())
                 {
@@ -56,7 +57,7 @@ public class WeaponController : MonoBehaviour {
 
                 }
                 onAttack = true;
-                Invoke("FinishAttack", 0.5f);
+                Invoke("FinishAttack", 0.5f); //Hero can attack next time after 0.5s
 
             }
             if (Input.GetKeyDown(KeyCode.S)) // attack in one direction
@@ -73,10 +74,10 @@ public class WeaponController : MonoBehaviour {
                     anim.SetTrigger("playerLeftAttack");
                 }
                 onAttack = true;
-                Invoke("FinishAttack", 0.5f);
+                Invoke("FinishAttack", 0.5f); //Hero can attack next time after 0.5s
 
             }
-            if (Input.GetKeyDown(KeyCode.D)) // attack in one direction
+            if (Input.GetKeyDown(KeyCode.D)) // down attack
             {
                 if (GetDirectionRight())
                 {
@@ -90,14 +91,14 @@ public class WeaponController : MonoBehaviour {
 
                 }
                 onAttack = true;
-                Invoke("FinishAttack", 0.5f);
+                Invoke("FinishAttack", 0.5f); //Hero can attack next time after 0.5s
             }
             if (Input.GetKeyDown(KeyCode.W)) // attack around hero
             {
                 swordml.gameObject.GetComponent<WeaponAttack>().activeAttackArea = true;
                 swordmr.gameObject.GetComponent<WeaponAttack>().activeAttackArea = true;
                 onAttack = true;
-                Invoke("FinishAttack", 0.5f);
+                Invoke("FinishAttack", 0.5f); //Hero can attack next time after 0.5s
             }
         }
     }
