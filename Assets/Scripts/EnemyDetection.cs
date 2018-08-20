@@ -12,11 +12,11 @@ public class EnemyDetection : MonoBehaviour {
     private bool followHero = false;
 
 
-    public float moveSpeed = 15;
-    public float jumpHeight = 60;
-    public float sight = 50;
+    private float moveSpeed = 15;
+    private float jumpHeight = 60;
+    private float sight = 50;
     public bool OnLeft = true; // postac zwrucona w lewo
-    public bool Stop = false;
+    public bool onAttack = false; // true - when Enemy is attacking
 
     void Start()
     {
@@ -25,7 +25,7 @@ public class EnemyDetection : MonoBehaviour {
         player = GameObject.FindGameObjectWithTag("Player");
     }
 
-    private void Update()
+    private void FixedUpdate()
     {
         Vector2 playerPosition = player.transform.position;
         Vector2 enemyPosition = GetComponent<Rigidbody2D>().position;
@@ -33,34 +33,57 @@ public class EnemyDetection : MonoBehaviour {
         Vector2 vel = new Vector2(0, 0);
         vel.y = rb2d.velocity.y;
 
-        if(rb2d.velocity.x < 0.01f)
+        if (enemyPosition.x > playerPosition.x) //enemy po prawej stronie bohatera
         {
-            anim.SetTrigger("EnemyStanding");
-            Stop = true;
+            if(enemyPosition.x < playerPosition.x + 7.3f) //hero is in attack area
+            {
+                base.gameObject.GetComponent<Enemy>().heroInAttackArea = true;
+                onAttack = true;
+                anim.SetTrigger("EnemyStanding");
+            }
+            else // hero is out of attack area
+            {
+                base.gameObject.GetComponent<Enemy>().heroInAttackArea = false;
+                onAttack = false;
+            }
         }
-        else
+        else //enemy po lewej stronie bohatera
         {
-            Stop = false;
+            if (enemyPosition.x > playerPosition.x - 7.3f) //hero is in attack area
+            {
+                base.gameObject.GetComponent<Enemy>().heroInAttackArea = true;
+                onAttack = true;
+                anim.SetTrigger("EnemyStanding");
+            }
+            else // hero is out of attack area
+            {
+                base.gameObject.GetComponent<Enemy>().heroInAttackArea = false;
+                onAttack = false;
+            }
         }
-
+        if(enemyPosition.y < playerPosition.y-11f)
+        {
+            base.gameObject.GetComponent<Enemy>().heroInAttackArea = false;
+            onAttack = false;
+        }
         if (dist.magnitude > 2*sight)
         {
             followHero = false;
             vel = new Vector2(0, 0);
         }
-        if (base.gameObject.GetComponent<Enemy>().onAttack == false) // block movement during attack to let enemy /odskoczyć/ after hit
+        if (onAttack == false) // block movement during attack to let enemy /odskoczyć/ after hit
         {
             if ((dist.magnitude < sight || followHero) && base.gameObject.GetComponent<Enemy>().heroInAttackArea == false)
             {
                 followHero = true;
 
-                if (enemyPosition.x > playerPosition.x + 5f)
+                if (enemyPosition.x > playerPosition.x )
                 {
                     vel.x = -moveSpeed;
                     OnLeft = true;
                     anim.SetTrigger("EnemyLeftWalk");
                 }
-                if (enemyPosition.x < playerPosition.x - 5f)
+                else
                 {
                     vel.x = moveSpeed;
                     OnLeft = false;

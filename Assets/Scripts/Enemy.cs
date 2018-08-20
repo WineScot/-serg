@@ -9,14 +9,10 @@ public class Enemy : MonoBehaviour {
     private Animator anim;
 
     public int healthLevel = 100;
-    public bool heroInAttackArea = false;
-    public bool onAttack = false; // true - when Enemy is attacking
+    public bool heroInAttackArea = false; // true when hero is close to us
+    public SpriteRenderer spre;
 
-    //private int maxhealthLevel = 1000;
-    //private int magicLevel = 1000;
-    //private int baseAttack = 40;
     private int armorLevel = 0;
-    //private int cureQuick = 10;
     
     
 
@@ -26,7 +22,8 @@ public class Enemy : MonoBehaviour {
         anim = GetComponent<Animator>();
         rb2d = GetComponent<Rigidbody2D>();
         player = GameObject.FindGameObjectWithTag("Player");
-	}
+        spre = GetComponent<SpriteRenderer>();
+    }
 
     public void PlayAnim(string animName) // play animation
     {
@@ -50,12 +47,13 @@ public class Enemy : MonoBehaviour {
     }
 
 
+    
+    
 
-	
-	
-	// Update is called once per frame
-	void Update () 
+
+    // Update is called once per frame
+    void Update () 
     {
-       
+        
 	}
 }

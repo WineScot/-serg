@@ -10,8 +10,8 @@ public class PlayerController : MonoBehaviour
     public bool directionRight = false; // true if hero is turned in right direction
 
     private bool canJump = true;
-    public float moveSpeed = 50;
-    public float jumpHeight = 110;
+    private float moveSpeed = 50;
+    private float jumpHeight = 110;
     public bool canMove = true;
 
     void Start()
