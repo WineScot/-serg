@@ -9,7 +9,6 @@ public class Enemy : MonoBehaviour {
     private Animator anim;
 
     public int healthLevel = 100;
-    public bool heroInAttackArea = false; // true when hero is close to us
     public SpriteRenderer spre;
 
     private int armorLevel = 0;
