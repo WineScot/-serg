@@ -6,17 +6,19 @@ public class Ekwipunek : MonoBehaviour {
 
     private Canvas ekwipunek;
     private GameObject locker;
+    private GameObject lockerwindow;
     public bool lockerArea = false;
     public GameObject thislocker;
     private int listSize;
-    private Transform trans;
+    public Transform trans;
     private Transform child;
 
     // Use this for initialization
     void Start ()
     {
         locker = GameObject.FindGameObjectWithTag("locker");
-        locker.SetActive(false);
+        lockerwindow = GameObject.FindGameObjectWithTag("lockerwindow");
+        lockerwindow.SetActive(false);
         ekwipunek = (Canvas)GetComponent<Canvas>();
         ekwipunek.enabled = false;
         Cursor.visible = false;
@@ -31,11 +33,11 @@ public class Ekwipunek : MonoBehaviour {
         {
            if(lockerArea)
             {
-                locker.SetActive(true);  
+                lockerwindow.SetActive(true);  
             }
            else
             {
-                locker.SetActive(false);
+                lockerwindow.SetActive(false);
             }
            if(ekwipunek.enabled)
             {

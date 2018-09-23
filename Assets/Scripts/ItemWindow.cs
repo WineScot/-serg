@@ -8,7 +8,6 @@ public class ItemWindow : MonoBehaviour , IDropHandler {
     public EqElementType elementTyp = EqElementType.EKWIPUNEK;
     public GameObject ekwipunekObiekt;
     public int maxElement;
-
     public Transform trans;
 
     // Use this for initialization
@@ -24,6 +23,7 @@ public class ItemWindow : MonoBehaviour , IDropHandler {
 
     public void OnDrop(PointerEventData eventData)
     {
+        
         EQElement item = eventData.pointerDrag.GetComponent<EQElement>();
         if(elementTyp == EqElementType.EKWIPUNEK) // if our window is ekipunek then we can put them everything
         {
