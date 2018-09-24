@@ -1,5 +1,6 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
+using UnityEngine.UI;
 using UnityEngine;
 
 public class Ekwipunek : MonoBehaviour {
@@ -9,6 +10,8 @@ public class Ekwipunek : MonoBehaviour {
     private GameObject lockerwindow;
     public bool lockerArea = false;
     public GameObject thislocker;
+    public Image imagewindow;
+    public Text textwindow;
     private int listSize;
     public Transform trans;
     private Transform child;
@@ -58,7 +61,9 @@ public class Ekwipunek : MonoBehaviour {
             }
            else
             {
-                if(lockerArea)
+                imagewindow.enabled = false;
+                textwindow.text = "";
+                if (lockerArea)
                 {
                     listSize = thislocker.gameObject.GetComponent<Locker>().trans.childCount;
                     if (locker.gameObject.GetComponent<ItemWindow>().trans != null)

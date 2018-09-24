@@ -17,6 +17,7 @@ public class EnemyDetection : MonoBehaviour {
     private float sight = 50;
     public bool OnLeft = true; // postac zwrucona w lewo
     public bool onAttack = false; // true - when Enemy is attacking
+    public bool heroInAttackArea;
 
     void Start()
     {
@@ -37,13 +38,13 @@ public class EnemyDetection : MonoBehaviour {
         {
             if(enemyPosition.x < playerPosition.x + 7.3f) //hero is in attack area
             {
-                base.gameObject.GetComponent<Enemy>().heroInAttackArea = true;
+                heroInAttackArea = true;
                 onAttack = true;
                 anim.SetTrigger("EnemyStanding");
             }
             else // hero is out of attack area
             {
-                base.gameObject.GetComponent<Enemy>().heroInAttackArea = false;
+                heroInAttackArea = false;
                 onAttack = false;
             }
         }
@@ -51,19 +52,19 @@ public class EnemyDetection : MonoBehaviour {
         {
             if (enemyPosition.x > playerPosition.x - 7.3f) //hero is in attack area
             {
-                base.gameObject.GetComponent<Enemy>().heroInAttackArea = true;
+                heroInAttackArea = true;
                 onAttack = true;
                 anim.SetTrigger("EnemyStanding");
             }
             else // hero is out of attack area
             {
-                base.gameObject.GetComponent<Enemy>().heroInAttackArea = false;
+                heroInAttackArea = false;
                 onAttack = false;
             }
         }
         if(enemyPosition.y < playerPosition.y-11f)
         {
-            base.gameObject.GetComponent<Enemy>().heroInAttackArea = false;
+            heroInAttackArea = false;
             onAttack = false;
         }
         if (dist.magnitude > 2*sight)
@@ -73,7 +74,7 @@ public class EnemyDetection : MonoBehaviour {
         }
         if (onAttack == false) // block movement during attack to let enemy /odskoczyć/ after hit
         {
-            if ((dist.magnitude < sight || followHero) && base.gameObject.GetComponent<Enemy>().heroInAttackArea == false)
+            if ((dist.magnitude < sight || followHero) && heroInAttackArea == false)
             {
                 followHero = true;
 
